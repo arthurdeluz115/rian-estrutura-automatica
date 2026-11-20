@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Estrutura Automática</title>
+  <meta name="description" content="Ative sua estrutura automática para vender na Europa em euro. Painel simples, real e premium para monitorar suas operações." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Estrutura Automática" />
+  <meta property="og:description" content="Ative sua estrutura automática para vender na Europa em euro. Painel simples, real e premium para monitorar suas operações." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --bg:#06090a; --card:#0d1311; --card2:#111916; --secondary:#16201c;
+      --border:rgba(255,255,255,.09); --border-strong:rgba(255,255,255,.18);
+      --fg:#f4f7f5; --muted:#8b9791;
+      --primary:#10b981; --primary2:#34d399; --primary-fg:#03140d;
+      --glow:0 0 28px -6px rgba(16,185,129,.55);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{background:var(--bg);color:var(--fg);font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+    button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+    img{display:block}
+    .hero{min-height:100vh;padding-bottom:8rem;
+      background:radial-gradient(120% 60% at 50% -10%,rgba(16,185,129,.16),transparent 60%),var(--bg)}
+    .wrap{max-width:28rem;margin:0 auto;padding:2.5rem 1.25rem 0}
+    .fade{animation:fade .5s ease both}
+    @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+    .grad{background:linear-gradient(135deg,var(--primary2),var(--primary) 55%,#059669)}
+    .glow{box-shadow:var(--glow)}
+
+    header{display:flex;justify-content:space-between;align-items:flex-start;gap:.75rem}
+    h1{font-size:1.875rem;font-weight:600;letter-spacing:-.025em}
+    .hello{margin-top:.375rem;font-size:.875rem;color:var(--muted)}
+    .logo{width:2.75rem;height:2.75rem;flex-shrink:0;border-radius:1rem;display:flex;align-items:center;justify-content:center;color:var(--primary-fg)}
+    .logo svg{width:1.25rem;height:1.25rem}
+
+    section{margin-top:2rem}
+    h2{font-size:1rem;font-weight:600}
+    .sub{margin:.125rem 0 .75rem;font-size:.75rem;color:var(--muted)}
+
+    /* produtos em alta */
+    .top3{display:grid;grid-template-columns:repeat(3,1fr);gap:.625rem}
+    .pcard{position:relative;overflow:hidden;border-radius:1rem;border:2px solid rgba(16,185,129,.4);background:var(--card);padding:.625rem;text-align:left;transition:all .3s;box-shadow:0 0 18px -8px rgba(16,185,129,.5)}
+    .pcard.sel{border-color:var(--primary);box-shadow:var(--glow)}
+    .badge{position:absolute;right:-.25rem;top:-.25rem;z-index:2;width:2.25rem;height:2.25rem;border-radius:999px;display:flex;align-items:center;justify-content:center;color:var(--primary-fg);font-size:.875rem;font-weight:700}
+    .thumb{aspect-ratio:1;width:100%;overflow:hidden;border-radius:.75rem;background:var(--secondary)}
+    .thumb img{width:100%;height:100%;object-fit:cover}
+    .hot{margin-top:.5rem;display:flex;align-items:center;gap:.25rem;color:var(--primary);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+    .hot svg{width:10px;height:10px}
+    .pname{margin-top:.125rem;font-size:11px;font-weight:600;line-height:1.25;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .trend{margin-top:.75rem;display:flex;gap:.5rem;align-items:flex-start;border-radius:.75rem;border:1px solid rgba(16,185,129,.2);background:rgba(16,185,129,.05);padding:.625rem .75rem;font-size:11px;line-height:1.6;color:rgba(244,247,245,.85)}
+    .trend svg{width:14px;height:14px;flex-shrink:0;margin-top:2px;color:var(--primary)}
+    .trend b{color:var(--fg);font-weight:600}
+    .label{margin:1.25rem 0 .5rem;padding:0 .25rem;font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+    .scroller{margin:0 -1.25rem;padding:0 1.25rem .5rem;overflow-x:auto;scrollbar-width:none}
+    .scroller::-webkit-scrollbar{display:none}
+    .row{display:flex;gap:.625rem;scroll-snap-type:x mandatory}
+    .ocard{flex:0 0 30%;min-width:110px;scroll-snap-align:start;overflow:hidden;border-radius:1rem;border:1px solid rgba(255,255,255,.1);background:#f5f5f5;padding:.5rem;text-align:left;transition:all .3s}
+    .ocard:hover{border-color:rgba(16,185,129,.4)}
+    .ocard.sel{border-color:var(--primary);box-shadow:var(--glow)}
+    .ocard .thumb{background:#fff}
+    .ocard .pname{margin-top:.5rem;color:#171717}
+
+    /* países */
+    .countries{display:flex;flex-direction:column;gap:.5rem}
+    .country{display:flex;width:100%;align-items:center;justify-content:space-between;border-radius:1rem;border:1px solid var(--border);background:var(--card);padding:.75rem 1rem;text-align:left;transition:all .5s}
+    .country:hover{border-color:var(--border-strong)}
+    .country.sel{border-color:var(--primary);box-shadow:var(--glow);background:linear-gradient(180deg,rgba(16,185,129,.08),var(--card))}
+    .country .l{display:flex;align-items:center;gap:.75rem}
+    .flag{font-size:1.25rem}
+    .cname{font-size:.875rem;font-weight:600}
+    .cdesc{font-size:11px;color:var(--muted)}
+    .country .r{display:flex;align-items:center;gap:.5rem;color:var(--muted)}
+    .pct{font-size:.75rem;font-weight:600;font-variant-numeric:tabular-nums}
+    .country.sel .pct{color:var(--primary)}
+    .country .r svg{width:1rem;height:1rem}
+    .note{margin-top:.5rem;padding:0 .25rem;font-size:10px;color:var(--muted)}
+
+    .divider{margin-top:2.5rem;display:flex;align-items:center;gap:.75rem}
+    .divider span.line{height:1px;flex:1;background:var(--border)}
+    .divider span.t{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.2em;color:var(--muted)}
+
+    /* meta */
+    .goals{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem}
+    .goal{border-radius:1rem;border:1px solid var(--border);background:var(--card);padding:1rem 0;text-align:center;transition:all .3s}
+    .goal:hover{border-color:var(--border-strong)}
+    .goal.sel{border-color:var(--primary);box-shadow:var(--glow)}
+    .goal .n{font-size:1.25rem;font-weight:600;font-variant-numeric:tabular-nums}
+    .goal.sel .n{color:var(--primary)}
+    .goal .u{margin-top:.125rem;font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+
+    /* projeção */
+    .proj{margin-top:.75rem;border-radius:.5rem;border:1px solid var(--border);background:linear-gradient(180deg,var(--card2),var(--card));padding:1.25rem}
+    .steps{display:flex;flex-direction:column;gap:.625rem}
+    .step{display:flex;align-items:center;gap:.625rem;font-size:.75rem;color:var(--muted);transition:color .3s}
+    .dot{width:1.25rem;height:1.25rem;border-radius:999px;border:1px solid var(--border-strong);background:var(--secondary);display:flex;align-items:center;justify-content:center;transition:all .3s}
+    .dot svg{width:.75rem;height:.75rem;opacity:0;color:var(--primary-fg)}
+    .step.done{color:var(--fg)}
+    .step.done .dot{background:var(--primary);border-color:var(--primary)}
+    .step.done .dot svg{opacity:1}
+
+    .cta{margin-top:1.5rem;display:flex;width:100%;height:3.5rem;align-items:center;justify-content:center;gap:.5rem;border-radius:1rem;font-size:1rem;font-weight:600;color:var(--primary-fg);transition:all .3s}
+    .cta svg{width:1rem;height:1rem}
+    .cta:disabled{opacity:.4;box-shadow:none;cursor:not-allowed}
+    .cta:not(:disabled):hover{opacity:.95}
+
+    .power-wrap{margin-top:2.5rem;padding-bottom:1rem;display:flex;flex-direction:column;align-items:center}
+    .power{position:relative;width:7rem;height:7rem;border-radius:999px;border:2px solid var(--border-strong);background:var(--card);display:flex;align-items:center;justify-content:center;color:var(--muted);transition:all .5s}
+    .power svg{width:2.25rem;height:2.25rem}
+    .power .st{position:absolute;bottom:-.25rem;font-size:9px;font-weight:700;letter-spacing:.1em}
+    .power.on{border-color:var(--primary);color:var(--primary);box-shadow:0 0 40px -6px rgba(16,185,129,.7)}
+    .pstatus{margin-top:1rem;font-size:.75rem;font-weight:500;letter-spacing:.025em;color:var(--muted);transition:color .3s}
+    .pstatus.on{color:var(--primary)}
+  </style>
+</head>
+<body>
+<div class="hero">
+  <div class="wrap">
+
+    <header class="fade">
+      <div>
+        <h1>Estrutura Automática</h1>
+        <p class="hello">Olá, Rian</p>
+      </div>
+      <div class="logo grad glow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
+      </div>
+    </header>
+
+    <section class="fade">
+      <h2>Escolher Produto</h2>
+      <p class="sub">Produtos em alta no momento</p>
+      <div class="top3" id="top3"></div>
+      <div class="trend">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+        <p><b>Tendência do momento:</b> estes produtos estão entre os mais selecionados nas ativações recentes</p>
+      </div>
+      <p class="label">Outros produtos disponíveis</p>
+      <div class="scroller"><div class="row" id="others"></div></div>
+    </section>
+
+    <section class="fade">
+      <h2>Escolher País</h2>
+      <p class="sub">Defina onde a estrutura será ativada</p>
+      <div class="countries" id="countries"></div>
+      <p class="note">Disponibilidade atualizada automaticamente conforme volume da estrutura</p>
+    </section>
+
+    <div class="divider"><span class="line"></span><span class="t">Configurações de vendas</span><span class="line"></span></div>
+
+    <section class="fade">
+      <h2>Meta de vendas por dia</h2>
+      <p class="sub">Defina quantas vendas você quer buscar por dia</p>
+      <div class="goals" id="goals"></div>
+    </section>
+
+    <section class="fade">
+      <h2>Projeção de operação</h2>
+      <div class="proj">
+        <div class="steps">
+          <div class="step" data-step="product"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Selecione um produto</span></div>
+          <div class="step" data-step="country"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Escolha um país</span></div>
+          <div class="step" data-step="goal"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Defina sua meta</span></div>
+        </div>
+      </div>
+    </section>
+
+    <button class="cta grad glow" id="cta" disabled>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg>
+      Ativar Atração Automática de Vendas
+    </button>
+
+    <div class="power-wrap">
+      <button class="power" id="power" aria-label="Ligar estrutura">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v10"/><path d="M18.4 6.6a9 9 0 1 1-12.77.04"/></svg>
+        <span class="st" id="powerLabel">OFF</span>
+      </button>
+      <p class="pstatus" id="pstatus">Estrutura inativa</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // Imagens: por padrão vêm do app no Lovable. Para hospedar tudo na Vercel,
+  // baixe as imagens para uma pasta "assets/" ao lado deste arquivo e troque IMG_BASE para "assets/".
+  const IMG_BASE = "https://https-estruturaautomatica-rianmedeiros-com.lovable.app/assets/";
+
+  const top3 = [
+    ["Óculos de Sol Polarizado","produto-oculos-Dp8QnwwM.jpg"],
+    ["Relógio Inteligente","produto-relogio-DWMggmvv.jpg"],
+    ["Fone Bluetooth Earbuds TWS","produto-fones-Csx_NZwr.jpg"]
+  ];
+  const others = [
+    ["Tábua de Cozinha Dobrável","produto-tabua-uUj14Wsr.jpg"],
+    ["Luminária LED Recarregável","produto-luminaria-BSiMh9w5.jpg"],
+    ["Organizador de Maquiagem","produto-organizador-BkGHp0mF.jpg"],
+    ["Garrafa Térmica","produto-garrafa-COX0O6as.jpg"],
+    ["Carregador Portátil Power Bank","produto-powerbank-BqzJ0ZLH.jpg"],
+    ["Massageador Elétrico Pistola","produto-massageador-CUwPvAhu.jpg"],
+    ["Ventilador Portátil USB","produto-ventilador-vRhvX3dT.jpg"],
+    ["Ring Light","produto-ringlight-KMKGA54G.jpg"],
+    ["Caixa de Som Bluetooth","produto-caixasom-ZUYvNKjn.jpg"],
+    ["Mini Projetor","produto-projetor-6AnhiOQH.jpg"],
+    ["Suporte para Celular","produto-suporte-DczpyH7b.jpg"],
+    ["Porta Temperos Magnético","produto-temperos-Fh9_0g_K.jpg"],
+    ["Kit Manicure","produto-manicure-BqNJEWPT.jpg"],
+    ["Squeeze Reutilizável","produto-squeeze-BM9PFu7k.jpg"],
+    ["Capa para Passaporte","produto-passaporte-BVFIKgyB.jpg"],
+    ["Escova de Dentes Elétrica","produto-escova-Eh9iHlia.jpg"],
+    ["Tapete Antifadiga","produto-tapete-BroZxDEs.jpg"]
+  ];
+  const countries = [
+    ["🇪🇸","Espanha","Volume alto · Demanda aquecida","86%"],
+    ["🇮🇹","Itália","Volume alto · Demanda forte","82%"],
+    ["🇸🇮","Eslovênia","Volume crescente · Demanda crescente","71%"],
+    ["🇨🇿","Tchéquia","Volume bom · Boa demanda","74%"],
+    ["🇵🇱","Polônia","Volume alto · Demanda aquecida","84%"]
+  ];
+  const goals = [3,5,9,12];
+
+  const flame = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>';
+  const chevron = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>';
+
+  const state = {product:null,country:null,goal:null};
+
+  document.getElementById("top3").innerHTML = top3.map(([n,f],i)=>`
+    <button class="pcard" data-product="${n}">
+      <div class="badge grad glow">${i+1}</div>
+      <div class="thumb"><img src="${IMG_BASE+f}" alt="${n}" loading="lazy" width="512" height="512"></div>
+      <div class="hot">${flame}<span>Em alta</span></div>
+      <p class="pname">${n}</p>
+    </button>`).join("");
+
+  document.getElementById("others").innerHTML = others.map(([n,f])=>`
+    <button class="ocard" data-product="${n}">
+      <div class="thumb"><img src="${IMG_BASE+f}" alt="${n}" loading="lazy" width="512" height="512"></div>
+      <p class="pname">${n}</p>
+    </button>`).join("");
+
+  document.getElementById("countries").innerHTML = countries.map(([fl,n,d,p])=>`
+    <button class="country" data-country="${n}">
+      <div class="l"><span class="flag">${fl}</span><div><p class="cname">${n}</p><p class="cdesc">${d}</p></div></div>
+      <div class="r"><span class="pct">${p}</span>${chevron}</div>
+    </button>`).join("");
+
+  document.getElementById("goals").innerHTML = goals.map(g=>`
+    <button class="goal" data-goal="${g}"><p class="n">${g}</p><p class="u">vendas</p></button>`).join("");
+
+  function pick(selector, attr, key){
+    document.querySelectorAll(selector).forEach(btn=>{
+      btn.addEventListener("click",()=>{
+        document.querySelectorAll(selector).forEach(b=>b.classList.remove("sel"));
+        btn.classList.add("sel");
+        state[key] = btn.dataset[attr];
+        update();
+      });
+    });
+  }
+  pick(".pcard, .ocard","product","product");
+  pick(".country","country","country");
+  pick(".goal","goal","goal");
+
+  const cta = document.getElementById("cta");
+  function update(){
+    document.querySelectorAll(".step").forEach(s=>s.classList.toggle("done", !!state[s.dataset.step]));
+    cta.disabled = !(state.product && state.country && state.goal);
+  }
+
+  const power = document.getElementById("power");
+  const pLabel = document.getElementById("powerLabel");
+  const pStatus = document.getElementById("pstatus");
+  function setPower(on){
+    power.classList.toggle("on",on);
+    pStatus.classList.toggle("on",on);
+    pLabel.textContent = on ? "ON" : "OFF";
+    pStatus.textContent = on ? "Estrutura ativa" : "Estrutura inativa";
+  }
+  cta.addEventListener("click",()=>{
+    setPower(true);
+    power.scrollIntoView({behavior:"smooth",block:"center"});
+  });
+  power.addEventListener("click",()=>{
+    if(!power.classList.contains("on") && cta.disabled) return;
+    setPower(!power.classList.contains("on"));
+  });
+</script>
+</body>
+</html>
